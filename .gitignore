@@ -1,0 +1,28 @@
+# --- Secrets & Keys (CRITICAL) ---
+*.pem
+*.env
+/Infrastructure/starman-key.pem
+
+# --- Terraform Generated Files ---
+.terraform/
+*.tfstate
+*.tfstate.backup
+*.tfplan
+.terraform.lock.hcl
+
+# --- .NET build folders ---
+bin/
+obj/
+[Dd]ebug/
+[Rr]elease/
+
+# --- Java/Maven build folders ---
+target/
+mvnw
+mvnw.cmd
+.mvn/
+
+# --- IDEs/OS ---
+.vscode/
+.idea/
+.DS_Store
