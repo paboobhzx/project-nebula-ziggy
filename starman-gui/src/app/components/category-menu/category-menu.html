@@ -1,0 +1,6 @@
+<div class="list-group">
+    <button *ngFor="let cat of categories" type="button" class="list-group-item list-group-item-action"
+        [class.active]="cat === selectedCategory" (click)="onSelect(cat)">
+        {{ cat }}
+    </button>
+</div>

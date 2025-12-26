@@ -1,0 +1,8 @@
+{
+    "/api": {
+        "target": "http://starman-alb-1486515443.us-east-1.elb.amazonaws.com",
+        "secure": false,
+        "changeOrigin": true,
+        "logLevel": "debug"
+    }
+}

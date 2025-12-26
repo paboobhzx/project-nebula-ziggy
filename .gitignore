@@ -26,3 +26,8 @@ mvnw.cmd
 .vscode/
 .idea/
 .DS_Store
+
+# Node / Angular
+node_modules/
+dist/
+.angular/

@@ -1,0 +1,25 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4 shadow-sm">
+  <div class="container-fluid">
+    <a class="navbar-brand fw-bold" href="#">
+      <i class="bi bi-stars"></i> Starman Shop
+    </a>
+    <span class="text-light">
+      <small>ID: {{ userId }}</small>
+    </span>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-3 mb-4">
+      <div class="p-3 bg-light rounded shadow-sm">
+        <h5 class="mb-3 text-muted">Departments</h5>
+        <app-category-menu (categorySelected)="onCategoryChange($event)"></app-category-menu>
+      </div>
+    </div>
+
+    <div class="col-md-9">
+      <app-product-list [selectedCategory]="currentCategory"></app-product-list>
+    </div>
+  </div>
+</div>

@@ -76,7 +76,34 @@ resource "aws_lb_listener_rule" "orders_rule" {
     }
     condition { 
         path_pattern {
-            values = ["/api/Orders"]
+            values = ["/api/*rders*"]
+        }
+    }
+}
+resource "aws_lb_listener_rule" "cart" {
+    listener_arn = aws_lb_listener.http.arn 
+    priority = 101 
+    action { 
+        type = "forward"
+        target_group_arn = aws_lb_target_group.cart_tg.arn
+    }
+    condition { 
+        path_pattern { 
+            values = ["/api/cart*"]
+        }
+    }
+}
+#inventory rule
+resource "aws_lb_listener_rule" "inventory" { 
+    listener_arn = aws_lb_listener.http.arn 
+    priority = 102
+    action { 
+        type = "forward"
+        target_group_arn = aws_lb_target_group.inventory_tg.arn 
+    }
+    condition { 
+        path_pattern { 
+            values = ["/api/inventory*"]
         }
     }
 }
@@ -91,6 +118,33 @@ resource "aws_lb_listener_rule" "inventory_rule" {
     condition { 
         path_pattern { 
             values = ["/actuator/*"]
+        }
+    }
+}
+#cart servuice target group
+resource "aws_lb_target_group" "cart_tg" {
+    name = "starman-cart-tg"
+    port = 8080
+    protocol = "HTTP"
+    vpc_id = aws_vpc.main.id
+    target_type = "ip"
+
+    health_check { 
+        path = "/swagger/index.html"
+        matcher = "200"
+    }
+}
+#route api/Cart* to the Cart Service
+resource "aws_lb_listener_rule" "cart_rule" {
+    listener_arn = aws_lb_listener.http.arn 
+    priority = 300 #Must be unique, orders = 100, inventory = 200
+    action { 
+        type = "forward"
+        target_group_arn = aws_lb_target_group.cart_tg.arn 
+    }
+    condition { 
+        path_pattern  { 
+            values = ["/api/Cart*"]
         }
     }
 }
