@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+
 
 
 @Component({
@@ -17,12 +19,14 @@ export class CategoryMenu {
     'Womens',
     'Kids',
     'Gym Clothing',
-    'Gym Acessories'
+    'Gym Accessories'
   ];
   selectedCategory = 'All Products';
+  constructor(private router: Router) { }
   onSelect(category: string): void {
     this.selectedCategory = category;
-    this.categorySelected.emit(category === 'All Products' ? '' : category);
+    const catParam = category === 'All Products' ? null : category;
+    this.router.navigate(['/'], { queryParams: { category: catParam } });
   }
 
 }

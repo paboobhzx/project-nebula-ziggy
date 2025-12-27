@@ -1,0 +1,70 @@
+<div class="container mt-5 text-white">
+    <h2 class="mb-4" style="color: #00d4ff;">Your Space Cargo 🛒</h2>
+
+    <div *ngIf="loading" class="text-center p-5">
+        <div class="spinner-border text-primary" role="status"></div>
+        <p class="mt-2">Scanning cargo bay...</p>
+    </div>
+
+    <div *ngIf="!loading && cartItems.length === 0" class="text-center p-5 border rounded"
+        style="background: rgba(255,255,255,0.05);">
+        <h3>Your cart is empty.</h3>
+        <p class="text-muted">Ready to equip for your mission?</p>
+        <a routerLink="/" class="btn btn-outline-light mt-3">Browse Equipment</a>
+    </div>
+
+    <div *ngIf="!loading && cartItems.length > 0" class="row">
+        <div class="col-lg-8">
+            <div class="table-responsive rounded shadow-sm" style="border: 1px solid rgba(255,255,255,0.1);">
+                <table class="table table-dark table-hover mb-0" style="background: transparent;">
+                    <thead>
+                        <tr style="color: #00d4ff;">
+                            <th>Product</th>
+                            <th>Price</th>
+                            <th>Qty</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of cartItems">
+                            <td class="align-middle">
+                                <span class="fw-bold">{{ item.productName || 'Unknown Item' }}</span><br>
+                                <small class="text-muted" *ngIf="item.details">
+                                    {{ item.details.color }} / {{ item.details.size }}
+                                </small>
+                            </td>
+                            <td class="align-middle">${{ item.price }}</td>
+                            <td class="align-middle">{{ item.quantity }}</td>
+                            <td class="align-middle fw-bold">${{ (item.price * item.quantity).toFixed(2) }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="col-lg-4 mt-4 mt-lg-0">
+            <div class="p-4 rounded shadow-sm"
+                style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);">
+                <h4 class="mb-3">Order Summary</h4>
+                <div class="d-flex justify-content-between mb-2">
+                    <span>Subtotal</span>
+                    <span>${{ totalPrice.toFixed(2) }}</span>
+                </div>
+                <div class="d-flex justify-content-between mb-3 text-success">
+                    <span>Shipping</span>
+                    <span>Free (Hyperloop)</span>
+                </div>
+                <hr class="bg-secondary">
+                <div class="d-flex justify-content-between mb-4 fs-4 fw-bold" style="color: #00d4ff;">
+                    <span>Total</span>
+                    <span>${{ totalPrice.toFixed(2) }}</span>
+                </div>
+
+                <button (click)="checkout()" class="btn btn-primary w-100 btn-lg"
+                    style="background-color: #d500f9; border-color: #d500f9;">
+                    Checkout Now 🚀
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

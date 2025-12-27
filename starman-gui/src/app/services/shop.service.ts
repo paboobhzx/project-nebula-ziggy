@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ShopService {
-  private baseUrl = '/api'
+  private baseUrl = 'http://starman-alb-825622284.us-east-1.elb.amazonaws.com/api'
 
   constructor(private http: HttpClient) { }
   getUserId(): string {
@@ -26,6 +26,17 @@ export class ShopService {
 
   addToCart(item: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/cart`, item);
+  }
+
+  getCart(userId: string): Observable<any[]> {
+    return this.http.get<any[]>(`{this.baseUrl}/cart/${userId}`);
+  }
+  clearCart(userId: string): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/cart/${userId}`);
+  }
+
+  checkout(order: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/orders`, order);
   }
 
 }

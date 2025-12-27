@@ -1,6 +1,8 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ShopService } from '../../services/shop.service';
 import { CommonModule } from '@angular/common';
+import { RouterLink, ActivatedRoute } from '@angular/router';
+
 
 
 
@@ -8,40 +10,55 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './product-list.html',
   styleUrl: './product-list.css',
 })
 export class ProductList {
-  @Input() selectedCategory: string = '';
+
   allProducts: any[] = [];
   filteredProducts: any[] = []
   cartMessage: string = '';
+  currentCategory: string | null = null;
 
-  constructor(private shopService: ShopService) { }
+  constructor(private shopService: ShopService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     //fetches products from AWS when the component loads
     this.shopService.getInventory().subscribe({
       next: (data) => {
         this.allProducts = data;
-        this.filterProducts();
+        this.route.queryParams.subscribe(params => {
+          this.currentCategory = params['category'] || null;
+          this.filterProducts();
+        })
+
       },
       error: (err) => console.error('Error fetching products: ', err)
     });
   }
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['selectedCategory']) {
-      this.filterProducts();
-    }
-  }
 
   filterProducts(): void {
-    if (!this.selectedCategory) {
-      this.filteredProducts = this.allProducts;
-    } else {
-      this.filteredProducts = this.allProducts.filter(p => p.category == this.selectedCategory);
+    const selected = this.currentCategory;
+
+    // EMERGENCY LOG: This will show us EXACTLY what the DB is sending
+    if (this.allProducts.length > 0) {
+      console.log("--- RAW DB DATA SAMPLE ---");
+      console.log("First Item Category in DB:", `"${this.allProducts[0].category}"`);
+      console.log("Selected Category in URL:", `"${selected}"`);
     }
+
+    if (!selected || selected.toLowerCase().trim() === 'all products') {
+      this.filteredProducts = [...this.allProducts];
+      return;
+    }
+
+    this.filteredProducts = this.allProducts.filter(p => {
+      if (!p || !p.category) return false;
+      return p.category.toLowerCase().trim() === selected.toLowerCase().trim();
+    });
+
+    console.log(`Filtering for: ${selected}. Found: ${this.filteredProducts.length} items.`);
   }
   getColor(category: string): string {
     switch (category) {
@@ -58,7 +75,7 @@ export class ProductList {
     const currentUserId = this.shopService.getUserId();
     const item = {
       userName: currentUserId,
-      productId: product.id,
+      productId: product.productId,
       quantity: 1,
       price: product.price
     };

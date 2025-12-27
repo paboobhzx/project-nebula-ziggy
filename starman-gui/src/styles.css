@@ -1,1 +1,76 @@
-/* You can add global styles to this file, and also import other style files */
+/* Starman Nebula Theme */
+body {
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    color: #e0e0e0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+}
+
+/* Navbar: Glass Effect */
+.navbar {
+    background: rgba(0, 0, 0, 0.7) !important;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.navbar-brand {
+    color: #00d4ff !important;
+    /* Neon Blue */
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Cards: Dark Glass */
+.card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
+    /* Neon Glow */
+}
+
+/* Buttons */
+.btn-primary,
+.btn-outline-primary {
+    background-color: transparent;
+    border-color: #00d4ff;
+    color: #00d4ff;
+    border-radius: 20px;
+}
+
+.btn-primary:hover,
+.btn-outline-primary:hover {
+    background-color: #00d4ff;
+    color: #000;
+    box-shadow: 0 0 15px #00d4ff;
+}
+
+/* Sidebar List */
+.list-group-item {
+    background-color: transparent;
+    color: #aaa;
+    border: none;
+    border-left: 3px solid transparent;
+}
+
+.list-group-item:hover,
+.list-group-item.active {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border-left: 3px solid #d500f9;
+    /* Neon Purple */
+    font-weight: bold;
+}
+
+/* Success Alerts */
+.alert-success {
+    background-color: rgba(40, 167, 69, 0.9);
+    color: white;
+    border: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}

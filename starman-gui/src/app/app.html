@@ -3,6 +3,15 @@
     <a class="navbar-brand fw-bold" href="#">
       <i class="bi bi-stars"></i> Starman Shop
     </a>
+    <div class="d-flex align-items-center gap-3">
+      <span class="text-light small d-none d-md-block">
+        ID: {{ userId }}
+      </span>
+
+      <a routerLink="/cart" class="btn btn-outline-light btn-sm">
+        View Cart 🛒
+      </a>
+    </div>
     <span class="text-light">
       <small>ID: {{ userId }}</small>
     </span>
@@ -12,14 +21,15 @@
 <div class="container">
   <div class="row">
     <div class="col-md-3 mb-4">
-      <div class="p-3 bg-light rounded shadow-sm">
-        <h5 class="mb-3 text-muted">Departments</h5>
-        <app-category-menu (categorySelected)="onCategoryChange($event)"></app-category-menu>
+      <div class="p-3 rounded shadow-sm"
+        style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);">
+        <h5 class="mb-3 text-white border-bottom pb-2 border-secondary">Departments</h5>
+        <app-category-menu></app-category-menu>
       </div>
     </div>
+  </div>
 
-    <div class="col-md-9">
-      <app-product-list [selectedCategory]="currentCategory"></app-product-list>
-    </div>
+  <div class="col-md-9">
+    <router-outlet></router-outlet>
   </div>
 </div>

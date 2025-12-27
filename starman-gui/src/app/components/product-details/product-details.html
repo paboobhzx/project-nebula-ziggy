@@ -1,0 +1,66 @@
+<div class="container mt-5" *ngIf="loading">
+    <div class="text-center text-white">Loading Starman Data...</div>
+</div>
+
+<div class="container mt-4" *ngIf="product">
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="d-flex align-items-center justify-content-center text-white rounded shadow"
+                style="background-color: #302b63; height: 400px; font-size: 2rem; border: 1px solid rgba(255,255,255,0.2);">
+                {{ product.name }}
+            </div>
+        </div>
+
+        <div class="col-md-6 text-white">
+            <h2 class="fw-bold mb-1" style="color: #00d4ff;">{{ product.name }}</h2>
+            <p class="text-muted mb-4">{{ product.category }} Collection</p>
+
+            <h3 class="mb-4">${{ getTotalPrice().toFixed(2) }}</h3>
+
+            <div class="mb-4">
+                <label class="fw-bold mb-2">Color: <span class="text-info">{{ selectedColor }}</span></label>
+                <div class="d-flex gap-2">
+                    <div *ngFor="let color of colors" (click)="selectedColor = color.name" class="rounded-circle"
+                        [style.background-color]="color.hex"
+                        [style.border]="selectedColor === color.name ? '3px solid #00d4ff' : '1px solid #666'"
+                        style="width: 40px; height: 40px; cursor: pointer;">
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <label class="fw-bold mb-2">Size:</label>
+                <div class="d-flex gap-2">
+                    <button *ngFor="let size of sizes" (click)="selectedSize = size" class="btn btn-sm"
+                        [class.btn-primary]="selectedSize === size"
+                        [class.btn-outline-secondary]="selectedSize !== size" style="min-width: 50px;">
+                        {{ size }}
+                    </button>
+                </div>
+            </div>
+
+            <div class="mb-4 p-3 rounded" style="background: rgba(255,255,255,0.05);">
+                <label class="fw-bold mb-3">Shipping Method:</label>
+                <div class="form-check" *ngFor="let ship of shippingOptions">
+                    <input class="form-check-input" type="radio" name="shipping" [id]="ship.id" [value]="ship.id"
+                        [(ngModel)]="selectedShipping">
+                    <label class="form-check-label d-flex justify-content-between" [for]="ship.id">
+                        <span>{{ ship.name }}</span>
+                        <span>+${{ ship.price }}</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="d-grid gap-2 d-md-block">
+                <button class="btn btn-outline-primary btn-lg me-md-2" (click)="addToCart(false)">
+                    Add to Cart
+                </button>
+                <button class="btn btn-primary btn-lg" style="background-color: #d500f9; border-color: #d500f9;"
+                    (click)="addToCart(true)">
+                    Buy Now
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>

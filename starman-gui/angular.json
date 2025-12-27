@@ -56,6 +56,9 @@
         },
         "serve": {
           "builder": "@angular/build:dev-server",
+          "options": {
+            "proxyConfig": "proxy.conf.json"
+          },
           "configurations": {
             "production": {
               "buildTarget": "starman-gui:build:production"
@@ -68,9 +71,6 @@
         },
         "test": {
           "builder": "@angular/build:unit-test"
-        },
-        "options": {
-          "proxyConfig": "src/proxy.conf.json"
         }
       }
     }

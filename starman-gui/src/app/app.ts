@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ShopService } from './services/shop.service';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { CategoryMenu } from './components/category-menu/category-menu';
 import { ProductList } from './components/product-list/product-list';
@@ -9,7 +9,7 @@ import { ProductList } from './components/product-list/product-list';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, CategoryMenu, ProductList],
+  imports: [CommonModule, CategoryMenu, ProductList, RouterLink, RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

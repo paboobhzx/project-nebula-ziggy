@@ -1,9 +1,9 @@
 package com.starman.inventory.repository;
 
-import com.starman.inventory.model.Inventory;
+import com.starman.inventory.model.InventoryItem;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
-public interface InventoryRepository extends JpaRepository<Inventory, Long> {
-    Optional<Inventory> findByProductId(String productId);
+public interface InventoryRepository extends JpaRepository<InventoryItem, Long> {
+    Optional<InventoryItem> findByProductId(String productId);
 }
