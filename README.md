@@ -45,7 +45,8 @@ Nebula Ziggy follows a **Decoupled Microservices** architecture:
 
 ## Running Locally:
 1) Clone the Repository
-```git clone https://github.com/your-username/nebula-ziggy.git
+```
+git clone https://github.com/your-username/nebula-ziggy.git`
 ```
 2) Frontend Setup
 ```
