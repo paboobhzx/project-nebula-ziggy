@@ -1,49 +1,49 @@
-🌌 Nebula Ziggy - Project Documentation
-Nebula Ziggy is a full-stack, cloud-native e-commerce platform designed to showcase a modern microservices architecture. The project facilitates the sale of "Starman" intergalactic gear by integrating a reactive Angular frontend with a high-performance .NET backend, fully orchestrated within the Amazon Web Services (AWS) ecosystem.
+# 🌌 Nebula Ziggy
+**The Future of Intergalactic Commerce.**
 
-🚀 The Mission (About)
-The goal of Nebula Ziggy is to provide a seamless, scalable shopping experience. The project serves as a technical blueprint for building decoupled systems that leverage serverless compute and NoSQL databases to handle dynamic user sessions and inventory management in real-time.
+Nebula Ziggy is a full-stack, cloud-native e-commerce platform built to demonstrate high-scale architecture using a microservices approach. This project integrates a modern frontend with a robust .NET backend, all orchestrated within the Amazon Web Services (AWS) ecosystem.
 
-🛠 Tech Stack
-Frontend
-Angular 17+: Utilizing RxJS for reactive state management and optimized data streaming.
+---
 
-Bootstrap 5: Ensuring a responsive and modern UI across all device types.
+## 🚀 The Mission (About)
+The goal of Nebula Ziggy is to provide a seamless shopping experience for "Starman" gear. The project explores the intersection of high-performance web development and automated cloud infrastructure, focusing on scalability, security, and low-latency data management.
 
-Backend (Microservices)
-.NET 8 API: Containerized C# services optimized for low-latency processing.
+## 🛠 Tech Stack
 
-AWS SDK for .NET: Direct integration with cloud resources for data persistence.
+### **Frontend**
+* **Angular 17+**: A reactive UI using RxJS for complex state management (like our `switchMap` category filtering).
+* **Bootstrap 5**: Responsive design for explorers on any device.
 
-Cloud Infrastructure (AWS)
-Amazon ECS (Fargate): Serverless container execution for the microservices.
+### **Backend (Microservices)**
+* **.NET 8 API**: High-performance services handling Inventory and Cart logic.
+* **C# / Entity Framework Concepts**: Optimized data models for rapid serialization.
 
-Amazon DynamoDB: A NoSQL database used for high-speed cart storage and persistence.
+### **Cloud Infrastructure (AWS)**
+* **Amazon ECS (Fargate)**: Serverless container execution.
+* **Amazon DynamoDB**: NoSQL key-value database for lightning-fast cart persistence.
+* **Application Load Balancer (ALB)**: Intelligent traffic routing across microservices.
+* **Amazon ECR**: Secure Docker container registry.
 
-Application Load Balancer (ALB): Managing path-based routing (e.g., /api/inventory vs /api/cart).
+---
 
-Amazon ECR: A private registry for managing Docker container images.
+## 🏗 Architecture Overview
+Nebula Ziggy follows a **Decoupled Microservices** architecture:
+1. **Inventory Service**: Manages the product catalog.
+2. **Cart Service**: Handles user-specific shopping sessions with DynamoDB integration.
+3. **Gateway**: AWS ALB routes requests based on path-based rules (e.g., `/api/cart/*` vs `/api/inventory/*`).
 
-🏗 Architecture Overview
-The system follows a Decoupled Microservices pattern:
+---
 
-Inventory Service: Serves the product catalog from a central repository.
+## 🛠 Installation & Local Setup
 
-Cart Service: Manages user-specific shopping sessions with state persistence in DynamoDB.
+### Prerequisites
+* Node.js & Angular CLI
+* .NET 8 SDK
+* Docker
+* AWS CLI (configured)
 
-ALB Gateway: Acts as the single entry point, routing traffic to the correct service based on request paths.
 
-🛠 Installation & Local Setup
-Prerequisites
-Node.js & Angular CLI
-
-.NET 8 SDK
-
-Docker Desktop
-
-AWS CLI (configured with appropriate credentials)
-
-Running Locally:
+## Running Locally:
 1) Clone the Repository
 ```git clone https://github.com/your-username/nebula-ziggy.git
 ```
@@ -55,7 +55,7 @@ ng serve
 ```
 3) Backend Setup: Open the solution in your IDE and run the individual project profiles for InventoryService and CartService.
 
-DEPLOYMENT INSTRUCTIONS
+### Deployment intructions
   This project is built for a containerized cloud environment.
 
 1) Dockerization: Build images using the linux/amd64 platform to ensure compatibility with AWS Fargate.
